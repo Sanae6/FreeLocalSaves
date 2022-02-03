@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net46</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>true</ImplicitUsings>
+        <TaikoFolder>C:\Users\Sanae\TaikoTDM\T Tablet\Content</TaikoFolder>
+        <!--        <TaikoFolder>C:\Users\Sanae\Downloads\taiko</TaikoFolder>-->
+    </PropertyGroup>
+
+    <ItemGroup>
+<!--        <PackageReference Include="BepInEx.Unity" Version="5.4.17"/>-->
+        <PackageReference Include="BepInEx.Core" Version="5.4.17" IncludeAssets="compile" />
+        <PackageReference Include="HarmonyX" Version="2.8.0" IncludeAssets="compile" />
+        <PackageReference Include="UnityEngine.Modules" Version="2020.3.19" IncludeAssets="compile" />
+    </ItemGroup>
+
+    <Target Name="Copy" AfterTargets="Build">
+        <Error Condition="'$(TaikoFolder)' == ''" Text="Couldn't find game path, make sure to set TaikoFolder property in the project config."/>
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(TaikoFolder)/BepInEx/plugins/"/>
+    </Target>
+
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(TaikoFolder)\Taiko no Tatsujin_Data\Managed\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="XGamingRuntime">
+            <HintPath>$(TaikoFolder)\Taiko no Tatsujin_Data\Managed\XGamingRuntime.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+</Project>
