@@ -8,7 +8,7 @@ using HarmonyLib;
 using UnityEngine;
 
 namespace FreeLocalSaves {
-    [BepInPlugin("ca.sanae.saves", "Free Local Saves", "1.0.0")]
+    [BepInPlugin("ca.sanae.saves", "Free Local Saves", "1.1.0")]
     public class LocalSavesPlugin : BaseUnityPlugin {
         public new static ManualLogSource Logger { get; private set; }
         public static ConfigEntry<string> SaveFolder;
