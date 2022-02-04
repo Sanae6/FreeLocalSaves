@@ -9,15 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-<!--        <PackageReference Include="BepInEx.Unity" Version="5.4.17"/>-->
         <PackageReference Include="BepInEx.Core" Version="5.4.17" IncludeAssets="compile" />
         <PackageReference Include="HarmonyX" Version="2.8.0" IncludeAssets="compile" />
         <PackageReference Include="UnityEngine.Modules" Version="2020.3.19" IncludeAssets="compile" />
     </ItemGroup>
 
     <Target Name="Copy" AfterTargets="Build">
-        <Error Condition="'$(TaikoFolder)' == ''" Text="Couldn't find game path, make sure to set TaikoFolder property in the project config."/>
-        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(TaikoFolder)/BepInEx/plugins/"/>
+        <Error Condition="'$(TaikoFolder)' == ''" Text="Couldn't find game path, make sure to set TaikoFolder property in the project config." />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(TaikoFolder)/BepInEx/plugins/" />
     </Target>
 
     <ItemGroup>

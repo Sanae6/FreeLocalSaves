@@ -13,27 +13,18 @@ namespace FreeLocalSaves {
         public new static ManualLogSource Logger { get; private set; }
         public static ConfigEntry<string> SaveFolder;
         public static ConfigEntry<bool> SaveToCloud;
+        public static ConfigEntry<string> GamerTag;
 
         private void Awake() {
             Logger = base.Logger;
             SaveFolder = Config.Bind("General", "SaveFolderLocation", Application.persistentDataPath, "Base folder where the Taiko save folder will be located");
             SaveToCloud = Config.Bind("General", "SaveToCloud", false, "Whether to save your save to the cloud and to disk, or just to save to disk (this won't make anything load from cloud unless the mod is removed)");
+            GamerTag = Config.Bind("General", "FakeGamertag", "", "A name to replace your Gamer Tag, or a lack thereof if you aren't playing entirely legitimately :)");
             Harmony harmony = new Harmony("ca.sanae.saves");
             harmony.PatchAll();
         }
 
         public static string SaveFolderLocation => $"{SaveFolder.Value}/Saves";
         public static string GetSaveFileLocation(string filename) => $"{SaveFolderLocation}/{filename}";
-    }
-
-    public class DisableFullScreen {
-        [HarmonyPatch(typeof(FocusManager), nameof(FocusManager.SetScreenType))]
-        [HarmonyPatch(typeof(FocusManager), nameof(FocusManager.OnApplicationFocus))]
-        [HarmonyPrefix]
-        public static bool Prefix(FocusManager __instance) {
-            Screen.fullScreen = true;
-            Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, FullScreenMode.FullScreenWindow, Screen.currentResolution.refreshRate);
-            return false;
-        }
     }
 }
